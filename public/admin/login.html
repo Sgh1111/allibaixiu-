@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <title>Sign in &laquo; Admin</title>
+  <link rel="stylesheet" href="../assets/vendors/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+
+<body>
+  <div style="position:fixed;right:0;top:0;color:white;width:300px;height:50px;background:pink;z-index:999;">
+    <div>账号：itheima@itcast.cn</div>
+    <div>密码：123456</div>
+  </div>
+  <div class="login">
+    <div class="login-wrap">
+      <img class="avatar" src="../assets/img/default.png">
+      <!-- 有错误信息时展示 -->
+      <!-- <div class="alert alert-danger">
+        <strong>错误！</strong> 用户名或密码错误！
+      </div> -->
+      <div class="form-group">
+        <label for="email" class="sr-only">邮箱</label>
+        <input id="email" type="email" class="form-control" placeholder="邮箱" autofocus>
+      </div>
+      <div class="form-group">
+        <label for="password" class="sr-only">密码</label>
+        <input id="password" type="password" class="form-control" placeholder="密码">
+      </div>
+      <button class="btn btn-primary btn-block" id="loginBtn">登 录</button>
+    </div>
+  </div>
+  <script src="../assets/vendors/jquery/jquery.min.js"></script>
+  <script>
+    //收集表单数据 添加点击事件
+    $('#loginBtn').on('click', function () {
+      //获取元素
+      var email = $('#email').val();
+      var password = $('#password').val();
+      //判断用户是否输入邮箱（是否为空）    trim()是去除空格的意思
+      if (email.trim().length == 0) {
+        alert('请输入邮箱')
+        return;
+      }
+      //判断用户是否输入密码（是否为空）
+      if (password.trim().length == 0) {
+        alert('请输入密码')
+        return;
+      }
+      //向服务器发送请求
+      $.ajax({
+        type: 'post',
+        url: '/login',
+        data: {
+          email: email,
+          password: password
+        },
+        success: function (res) {
+          // 跳转到后台首页
+          location.href = 'index.html'
+        },
+        error: function () {
+          alert('邮箱或者密码错误')
+        }
+      })
+
+    })
+
+  </script>
+</body>
+
+</html>
