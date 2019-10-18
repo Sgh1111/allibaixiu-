@@ -42,11 +42,15 @@
             <!-- show when image chose -->
             <img class="help-block thumbnail" style="display: none">
             <input id="feature" class="form-control" type="file">
+            <!-- 手动添加一个隐藏Input 当点击提交的时候 自动收集表单数据 -->
+            <!-- 用来存图片的地址 -->
+            <!-- 因为这个东西不能给用户看到 -->
+            <input type="hidden" name="thumbnail" id="thumbnail">
           </div>
           <div class="form-group">
             <label for="category">所属分类</label>
             <select name="category" id="category" class="form-control">
-              <option value="1">未分类</option>
+              
               <option value="2">潮生活</option>
             </select>
           </div>
@@ -108,5 +112,12 @@
 
   <script src="../assets/vendors/jquery/jquery.js"></script>
   <script src="../assets/vendors/bootstrap/js/bootstrap.js"></script>
+  <script src="../assets/vendors/art-template/template-web.js"></script>
+  <script type="text/html" id ="categoryTpl">
+  {{each data}}
+  <option value="{{$value._id}}">{{$value.title}}</option>
+  {{/each}}
+  </script>
+  <script src="../assets/js/post-add.js"></script>
 </body>
 </html>
